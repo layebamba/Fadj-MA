@@ -13,7 +13,8 @@ from .views import (
     ClientViewSet,
     MedicineViewSet,
     SaleViewSet,
-    SaleItemViewSet
+    SaleItemViewSet,
+    seed_database,
 )
 
 app_name = 'api'
@@ -24,6 +25,7 @@ router.register(r'clients', ClientViewSet, basename='client')
 router.register(r'medicines', MedicineViewSet, basename='medicine')
 router.register(r'sales', SaleViewSet, basename='sale')
 router.register(r'sale-items', SaleItemViewSet, basename='sale-item')
+path('seed/', seed_database, name='seed'),
 
 
 urlpatterns = [

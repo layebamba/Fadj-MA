@@ -15,6 +15,8 @@ from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework import viewsets, filters
 from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
+from django.http import JsonResponse
+from django.core.management import call_command
 from django.db import models
 from .models import MedicineGroup, Supplier, Client, Medicine,Sale,SaleItem
 from .serializers import MedicineGroupSerializer, SupplierSerializer, ClientSerializer,MedicineSerializer,SaleSerializer, SaleItemSerializer
@@ -279,3 +281,15 @@ class SaleItemViewSet(viewsets.ReadOnlyModelViewSet):
         )
 
         return Response(stats)
+
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])  # À SÉCURISER ou SUPPRIMER après usage
+def seed_database(request):
+    """Route temporaire pour populer la base en production"""
+    try:
+        call_command('seed_data')
+        return JsonResponse({'message': 'Base de données peuplée avec succès'})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
