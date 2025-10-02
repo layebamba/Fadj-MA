@@ -25,7 +25,7 @@ router.register(r'clients', ClientViewSet, basename='client')
 router.register(r'medicines', MedicineViewSet, basename='medicine')
 router.register(r'sales', SaleViewSet, basename='sale')
 router.register(r'sale-items', SaleItemViewSet, basename='sale-item')
-path('seed/', seed_database, name='seed'),
+
 
 
 urlpatterns = [
@@ -36,5 +36,6 @@ urlpatterns = [
     path('auth/logout/', logout_view, name='logout'),
     path('auth/profile/', UserDetailView.as_view(), name='profile'),
     path('auth/change-password/', ChangePasswordView.as_view(), name='change_password'),
+    path('seed/', seed_database, name='seed'),
     path('', include(router.urls)),
 ]
