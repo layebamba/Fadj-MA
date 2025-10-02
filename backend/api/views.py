@@ -283,13 +283,3 @@ class SaleItemViewSet(viewsets.ReadOnlyModelViewSet):
         return Response(stats)
 
 
-
-@api_view(['POST'])
-@permission_classes([AllowAny])  # À SÉCURISER ou SUPPRIMER après usage
-def seed_database(request):
-    """Route temporaire pour populer la base en production"""
-    try:
-        call_command('seed_data')
-        return JsonResponse({'message': 'Base de données peuplée avec succès'})
-    except Exception as e:
-        return JsonResponse({'error': str(e)}, status=500)

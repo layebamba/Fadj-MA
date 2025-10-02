@@ -14,7 +14,7 @@ from .views import (
     MedicineViewSet,
     SaleViewSet,
     SaleItemViewSet,
-    seed_database,
+
 )
 
 app_name = 'api'
@@ -36,6 +36,5 @@ urlpatterns = [
     path('auth/logout/', logout_view, name='logout'),
     path('auth/profile/', UserDetailView.as_view(), name='profile'),
     path('auth/change-password/', ChangePasswordView.as_view(), name='change_password'),
-    path('seed/', seed_database, name='seed'),
     path('', include(router.urls)),
 ]
