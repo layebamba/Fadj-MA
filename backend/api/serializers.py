@@ -121,6 +121,7 @@ class MedicineSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = [
             'id',
+            'medicine_id',
             'is_low_stock',
             'profit_margin',
             'created_by',
@@ -221,6 +222,7 @@ class SaleSerializer(serializers.ModelSerializer):
                 total_price=quantity * unit_price
             )
 
+            # Mettre à jour le stock
             medicine.stock_quantity -= quantity
             medicine.save()
 

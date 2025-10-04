@@ -15,8 +15,7 @@ from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework import viewsets, filters
 from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
-from django.http import JsonResponse
-from django.core.management import call_command
+
 from django.db import models
 from .models import MedicineGroup, Supplier, Client, Medicine,Sale,SaleItem
 from .serializers import MedicineGroupSerializer, SupplierSerializer, ClientSerializer,MedicineSerializer,SaleSerializer, SaleItemSerializer
