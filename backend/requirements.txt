@@ -13,3 +13,4 @@ requests==2.31.0
 dj-database-url==2.1.0
 django-cloudinary-storage==0.3.0
 cloudinary==1.41.0
+reportlab==4.0.7

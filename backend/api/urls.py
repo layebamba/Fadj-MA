@@ -1,6 +1,7 @@
 
 
 from django.urls import path,include
+from .reports import download_dashboard_report
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views import (
@@ -14,7 +15,7 @@ from .views import (
     MedicineViewSet,
     SaleViewSet,
     SaleItemViewSet,
-    seed_database,
+
 )
 
 app_name = 'api'
@@ -36,6 +37,6 @@ urlpatterns = [
     path('auth/logout/', logout_view, name='logout'),
     path('auth/profile/', UserDetailView.as_view(), name='profile'),
     path('auth/change-password/', ChangePasswordView.as_view(), name='change_password'),
-    path('seed/', seed_database, name='seed'),
+    path('reports/dashboard/', download_dashboard_report, name='dashboard_report'),
     path('', include(router.urls)),
 ]

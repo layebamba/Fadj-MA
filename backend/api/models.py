@@ -142,20 +142,28 @@ class Medicine(models.Model):
         verbose_name="Seuil d'alerte stock"
     )
     composition = models.TextField(
+        blank=True,
+        default='',
         verbose_name="Composition"
     )
     manufacturer = models.CharField(
         max_length=255,
+        blank=True,
+        default='',
         verbose_name="Fabricant/Commerçant"
     )
     consumption_type = models.CharField(
         max_length=20,
         choices=CONSUMPTION_TYPES,
+        blank=True,
+        default='oral',
         verbose_name="Type de consommation"
     )
     expiration_date = models.DateField(
-        verbose_name="Date d'expiration"
-    )
+    null=True,
+    blank=True,
+    verbose_name="Date d'expiration"
+)
     description = models.TextField(
         blank=True,
         verbose_name="Description"
@@ -175,11 +183,14 @@ class Medicine(models.Model):
     pharmaceutical_form = models.CharField(
         max_length=20,
         choices=PHARMACEUTICAL_FORMS,
+        blank=True,
+        default='comprime',
         verbose_name="Forme pharmaceutique"
     )
     purchase_price = models.DecimalField(
         max_digits=10,
         decimal_places=2,
+        default=0,
         validators=[MinValueValidator(Decimal('0.00'))],
         verbose_name="Prix d'achat (FCFA)"
     )
@@ -221,6 +232,12 @@ class Medicine(models.Model):
             models.Index(fields=['expiration_date']),
         ]
 
+    def save(self, *args, **kwargs):
+        if not self.medicine_id:
+            import time
+            timestamp = str(int(time.time() * 1000))[-9:]
+            self.medicine_id = f"D06ID{timestamp}"
+        super(Medicine, self).save(*args, **kwargs)
     def __str__(self):
         return f"{self.name} ({self.medicine_id})"
 
